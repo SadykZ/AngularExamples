@@ -1,0 +1,199 @@
+<hr>
+
+<p>
+  <b>Переменная</b> 
+</p>
+<p>
+  {{customValue}}
+</p>
+
+<hr>
+
+<p>
+  <b>Формула</b>
+</p>
+<p>
+  2 + 2 = {{ 2 + 2 }}
+</p>
+
+<hr>
+
+<p>
+  <b>DropDownList with Event</b>
+</p>
+<p>
+  <select (change)="customDropDown($event)">
+    <option *ngFor="let month of months">{{month}}</option>
+  </select>
+</p>
+
+<hr>
+
+<p>
+  <b>Show or Hide</b>
+</p>
+<p>
+  <span *ngIf="isAvailable == true">
+    If the value of isavailable is set to false it will not display the text.
+  </span>
+</p>
+
+<hr>
+
+<p>
+  <b>ngTemplate</b>
+</p>
+<div>
+  <span *ngIf="isAvailable == true; then condition1 else condition2">We have teo templates. Templete show by isAvailable value</span>
+  <ng-template #condition1>is Available</ng-template>
+  <ng-template #condition2>is Busy</ng-template>
+</div>
+
+<hr>
+
+<p>
+  <b>Events</b>
+</p>
+<button (click)="customButtonClick($event)">Change value of isAvailable</button>
+
+<hr>
+
+<p>
+  <b>Custom Directive</b>
+</p>
+<p>To create directive in command line write "ng generate directive directives/changeText"</p>
+<p>angular-cli creates files:</p>
+<p>src/app/directives/change-text.directive.spec.ts</p>
+<p>src/app/directives/change-text.directive.ts</p>
+<p>and update app.module.ts</p>
+<br>
+<span appChangeText>Hello</span>
+
+<hr>
+
+<p>
+  <b>Pipes</b>
+</p>
+<p>{{customValue | lowercase}}</p>
+<p>{{customValue | uppercase}}</p>
+<p>{{now | date : 'dd.MM.yyyy'}}</p>
+<p>{{now | date : 'hh:mm'}}</p>
+<p>{{now | date : 'longDate'}}</p>
+<p>{{now | date : 'shortTime'}}</p>
+<p>{{0.5 | percent}}</p>
+<p>{{250 | currency : "EUR"}}</p>
+<p>{{steve | json}}</p>
+<p>{{months | slice:2:6}}</p>
+<p>slice: here 2 and 6 refers to the start and the end index</p>
+
+<hr>
+
+<p>
+  <b>Custom Pipe</b>
+</p>
+<p>To create pipe in command line write "ng generate pipe pipes/customPipe"</p>
+<p>angular-cli creates files:</p>
+<p>src/app/pipes/custom-pipe.pipe.spec.ts</p>
+<p>src/app/pipes/custom-pipe.pipe.ts</p>
+<p>and update app.module.ts</p>
+<br>
+<p>(Here custom pipe) Sqrt of 9 is: {{9 | customPipe}}</p>
+
+<hr>
+
+<p>
+  <b>Routing (like a PartialView)</b>
+</p>
+<p>Added some code to app.module.ts</p>
+<p>
+  <a routerLink="about-page">Click to Redirect</a>
+</p>
+<router-outlet></router-outlet>
+
+<hr>
+
+<p>
+  <b>Services</b>
+</p>
+<p>
+  To create service in command line write "ng generate service services/customService"
+</p>
+<p>angular-cli creates files:</p>
+<p>src/app/services/custom-service.service.spec.ts</p>
+<p>src/app/services/custom-service.service.ts</p>
+<br>
+<p>you have change app.module.ts yourself</p>
+<br>
+<p>Function result from Service: <b>{{nowFromService}}</b></p>
+<p>First value from Service: <b>{{serviceFirstVal}}</b></p>
+<p>Second value from Service: <b>{{serviceSecondVal}}</b></p>
+
+<hr>
+
+<p>
+  <b>Http Services</b>
+</p>
+<p>To work with http service you need to change code in:</p>
+<p>app.module.ts</p>
+<p>app.component.ts</p>
+<br>
+<table class="table table-hover table-bordered table-striped">
+  <thead>
+    <tr>
+      <td><b>Name</b></td>
+      <td><b>Address</b></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of httpData">
+      <td>{{data.name}}</td>
+      <td>{{data.address.city}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<p>
+  <b>Forms</b>
+</p>
+<p>To work with Forms we need to change:</p>
+<p>app.module.ts</p>
+<br>
+<p>
+  <b>Forms (Template)</b>
+</p>
+<form #userLogin="ngForm" (ngSubmit)="onClickFormTemplate(userLogin.value)">
+  <input type="text" name="emailID" placeholder="email id" ngModel>
+  <br>
+  <input type="text" name="password" placeholder="password" ngModel>
+  <br>
+  <input type="submit" value="submit">
+</form>
+
+<br>
+
+<p>
+  <b>Forms (Template)</b>
+</p>
+<form [formGroup] = "formData" (ngSubmit) = "onClickFormModel(formData.value)">
+  <input type="text" class="fortextbox" name="email" placeholder="email" formControlName="email">
+  <br>
+  <input type="password" class="fortextbox" name="pass" placeholder="password" formControlName="pass">
+  <br>
+  <input type="submit" class="forsubmit" value="Log In">
+</form>
+
+<hr>
+
+<p>
+  <b>Animations</b>
+</p>
+<p>You must change in:</p>
+<p>app.module.ts</p>
+<div>
+  <button (click)="animate()">Click Me!</button>
+  <div [@myanimation]="state" class="rotate">
+    <img src="../../../assets/gelandewagen.jpg" width="300" height="200">
+  </div>
+</div>
