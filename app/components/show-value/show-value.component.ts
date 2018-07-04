@@ -35,7 +35,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
    }
     `
   ],
-  animations: 
+  animations:
   [
     trigger('myanimation',[
        state('smaller',style({
@@ -48,27 +48,31 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     ])
   ]
 })
-export class ShowValueComponent implements OnInit 
+export class ShowValueComponent implements OnInit
 {
   //  Переменная
   customValue = "Sadyk Ziyatbekov";
 
+  //  Время в миллесекундах и Запись/Чтение в миллесекундах
+  currentDate: Date;
+  expireDate: Date;
+
   //  DropDownList with Event
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  
+
   //  Show or Hide; ngTemplate; Events;
   isAvailable = true;
 
   //  Pipes
-  now = new Date();  
-  
+  now = new Date();
+
   //  Services
   nowFromService;
   serviceFirstVal;
   serviceSecondVal;
-  
+
   //  Directives
-  steve = 
+  steve =
   {
     firstname: 'Steve',
     secondname: 'Jobs'
@@ -90,13 +94,21 @@ export class ShowValueComponent implements OnInit
 
     //  Http Services
     private http: Http
-  ) 
-  { 
-    
+  )
+  {
+
   }
 
-  ngOnInit() 
+  ngOnInit()
   {
+    //  Время в миллесекундах и Запись/Чтение в миллесекундах
+    this.currentDate = new Date();  //  Текущая дата
+    this.expireDate = new Date();   //  Дата истечения
+    this.expireDate.setDate(this.expireDate.getDate() + 1); //  Текущая дата + 1 день
+    localStorage.setItem('TokenExpire', this.expireDate.getTime().toString());  //  Запись даты истечения в миллесекундах (начиная с 1.1.1970)
+    alert(localStorage.getItem('TokenExpire'));
+
+
     //  Services
     this.nowFromService = this.customService.nowFromService();
     this.serviceFirstVal = this.customService.serviceFirstValue;
@@ -111,7 +123,7 @@ export class ShowValueComponent implements OnInit
               .map((response) => response.json())
               .subscribe
               (
-                (data) => 
+                (data) =>
                 {
                   this.httpData = data;
                   console.log(data);
